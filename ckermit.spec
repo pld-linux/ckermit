@@ -16,7 +16,7 @@ Patch0:		cku-ssl-krb-srp.patch.gz
 Patch1:		cku-makefile.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	pam-devel
-BuildRequires:	openssl-devel >= 0.9.7c
+BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	gmp-devel >= 3.1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
