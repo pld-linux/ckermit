@@ -1,12 +1,12 @@
 Summary:	The quintessential all-purpose communications program
 Summary(pl):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
-Version:	7.0.197
-Release:	4
+Version:	8.0.208
+Release:	1
 License:	Special (see Copyright Notice)
 Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
-Source0:	ftp://kermit.columbia.edu/kermit/archives/cku197.tar.gz
+Source0:	ftp://kermit.columbia.edu/kermit/archives/cku208.tar.gz
 Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
 Source3:	cku-%{name}.locale.ini
@@ -15,7 +15,7 @@ Patch0:		cku-ssl-krb-srp.patch.gz
 Patch1:		cku-makefile.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	pam-devel
-BuildRequires:	openssl-devel >= 0.9.7
+BuildRequires:	openssl-devel >= 0.9.7a
 BuildRequires:	gmp-devel >= 3.1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,7 +35,7 @@ komunikacyjnych.
 
 %prep
 %setup -q -c
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
 
 %build
@@ -62,9 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ckaaaa.txt ckc197.txt ckcbwr.txt ckccfg.txt ckcplm.txt
-%doc ckermit2.txt ckuaaa.txt ckubwr.txt ckwart.txt iksd.txt
-%doc security.txt telnet.txt COPYING.TXT
+%doc *.txt COPYING.TXT
 
 %dir %{_sysconfdir}/kermit
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/kermit/*
