@@ -8,7 +8,7 @@
 +	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,SRP,SSL...'
 +	$(MAKE) krbmit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
 +	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
-+	-DCK_AUTHENTICATION -DCK_SHADOW \
++	-DCK_AUTHENTICATION -DCK_SHADOW -DOPENSSL_097 \
 +	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM \
 +	-DCK_CURSES -DCK_POSIX_SIG -DTCPSOCKET -DLINUXFSSTND -DHAVE_CRYPT_H \
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
