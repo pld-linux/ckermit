@@ -4,6 +4,7 @@ Version:	7.0.197
 Release:	2
 LIcense:	Special (see Copyright Notice)
 Group:		Applications/Communications
+Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
 Vendor:		The Kermit Project <kermit@columbia.edu>
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku197.tar.gz
@@ -71,9 +72,9 @@ you have to pay for it.
 %patch1 -p1
 
 %build
-%{__make} linux-PLD+ssl+pam OPT="$RPM_OPT_FLAGS" LNKFLAGS="-s"
-#make linux-pld-ssl-srp-pam OPT="$RPM_OPT_FLAGS" LDFLAGS="-s"
-#make linux-pld-krb-ssl-srp-pam OPT="$RPM_OPT_FLAGS" LDFLAGS="-s"
+%{__make} linux-PLD+ssl+pam OPT="%{rpmcflags}" LNKFLAGS="%{rpmldflags}"
+#make linux-pld-ssl-srp-pam OPT="%{rpmcflags}" LDFLAGS="%{rpmldflags}"
+#make linux-pld-krb-ssl-srp-pam OPT="%{rpmcflags}" LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -81,7 +82,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/kermit}
 
 perl -pi -e "s|%{_prefix}/local/bin/kermit|%{_bindir}/kermit|g" ckermit.ini
 
-install -s krbmit $RPM_BUILD_ROOT%{_bindir}/kermit
+install krbmit $RPM_BUILD_ROOT%{_bindir}/kermit
 install ckuker.nr $RPM_BUILD_ROOT%{_mandir}/man1/kermit.1
 install ckermit.ini $RPM_BUILD_ROOT%{_sysconfdir}/kermit/
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.local.ini
@@ -91,8 +92,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.phone
 
 gzip -9nf ckaaaa.txt ckc197.txt ckcbwr.txt ckccfg.txt ckcplm.txt \
 	ckermit2.txt ckuaaa.txt ckubwr.txt ckwart.txt iksd.txt \
-	security.txt telnet.txt COPYING.TXT \
-	$RPM_BUILD_ROOT%{_mandir}/man1/*
+	security.txt telnet.txt COPYING.TXT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
