@@ -1,12 +1,12 @@
 Summary:	The quintessential all-purpose communications program
 Name:		ckermit
 Version:	7.0.197
-Release:	2
-LIcense:	Special (see Copyright Notice)
+Release:	3
+License:	Special (see Copyright Notice)
+Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
-Vendor:		The Kermit Project <kermit@columbia.edu>
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku197.tar.gz
 Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
@@ -16,7 +16,7 @@ Patch0:		cku-ssl-krb-srp.patch.gz
 Patch1:		cku-makefile.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	pam-devel
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.6a
 BuildRequires:	gmp-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -99,9 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {ckaaaa.txt,ckc197.txt,ckcbwr.txt,ckccfg.txt,ckcplm.txt}.gz
-%doc {ckermit2.txt,ckuaaa.txt,ckubwr.txt,ckwart.txt,iksd.txt}.gz
-%doc {security.txt,telnet.txt,COPYING.TXT}.gz
+%doc *.gz
 %dir %{_sysconfdir}/kermit
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/kermit/*
 %attr(755, root, root) %{_bindir}/kermit
