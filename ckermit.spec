@@ -1,7 +1,7 @@
 Summary:	The quintessential all-purpose communications program
 Name:		ckermit
 Version:	7.0.197
-Release:	3
+Release:	4
 License:	Special (see Copyright Notice)
 Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
@@ -17,7 +17,7 @@ Patch1:		cku-makefile.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.6a
-BuildRequires:	gmp-devel
+BuildRequires:	gmp-devel >= 3.1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
