@@ -57,16 +57,15 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.modem.ini
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.locale.ini
 install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.phone
 
-gzip -9nf ckaaaa.txt ckc197.txt ckcbwr.txt ckccfg.txt ckcplm.txt \
-	ckermit2.txt ckuaaa.txt ckubwr.txt ckwart.txt iksd.txt \
-	security.txt telnet.txt COPYING.TXT
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc ckaaaa.txt ckc197.txt ckcbwr.txt ckccfg.txt ckcplm.txt
+%doc ckermit2.txt ckuaaa.txt ckubwr.txt ckwart.txt iksd.txt
+%doc security.txt telnet.txt COPYING.TXT
+
 %dir %{_sysconfdir}/kermit
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/kermit/*
 %attr(755, root, root) %{_bindir}/kermit
