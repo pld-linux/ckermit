@@ -1,7 +1,7 @@
 Summary:	The quintessential all-purpose communications program
 Name:		ckermit
 Version:	7.0.197
-Release:	1
+Release:	2
 LIcense:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Vendor:		The Kermit Project <kermit@columbia.edu>
@@ -76,6 +76,8 @@ make linux-PLD+ssl+pam OPT="$RPM_OPT_FLAGS" LNKFLAGS="-s"
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/kermit}
+
+perl -pi -e "s|/usr/local/bin/ckermit|%{_bindir}/ckermit|g" ckermit.ini
 
 install -s krbmit $RPM_BUILD_ROOT%{_bindir}/kermit
 install ckuker.nr $RPM_BUILD_ROOT%{_mandir}/man1/kermit.1
