@@ -75,7 +75,7 @@ make linux-PLD+ssl+pam OPT="$RPM_OPT_FLAGS" LNKFLAGS="-s"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdiir}/kermit}
+mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/kermit}
 
 install -s krbmit $RPM_BUILD_ROOT%{_bindir}/kermit
 install ckuker.nr $RPM_BUILD_ROOT%{_mandir}/man1/kermit.1
