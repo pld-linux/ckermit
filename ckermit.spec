@@ -2,10 +2,9 @@ Summary:	The quintessential all-purpose communications program
 Name:		ckermit
 Version:	7.0.197
 Release:	1
-Copyright:	Special (see Copyright Notice)
+LIcense:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Vendor:		The Kermit Project <kermit@columbia.edu>
-URL:		http://www.columbia.edu/kermit/
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku197.tar.gz
 Source1:	cku-ckermit.local.ini
 Source2:	cku-ckermit.modem.generic.ini
@@ -13,6 +12,7 @@ Source3:	cku-ckermit.locale.ini
 Source4:	cku-ckermit.phone
 Patch0:		cku-ssl-krb-srp.patch.gz
 Patch1:		cku-makefile.patch
+URL:		http://www.columbia.edu/kermit/
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
 BuildRequires:	gmp-devel
