@@ -1,4 +1,5 @@
 Summary:	The quintessential all-purpose communications program
+Summary(pl):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	7.0.197
 Release:	4
@@ -25,46 +26,14 @@ C-Kermit is a combined serial and network communication software
 package offering a consistent, medium-independent, cross-platform
 approach to connection establishment, terminal sessions, file transfer
 and management, character-set translation, and automation of
-communication tasks. For more information please see:
+communication tasks.
 
-http://www.columbia.edu/kermit/
-
-C-KERMIT 7.0 COPYRIGHT NOTICE:
-
-The C-Kermit license does not fall into any convenient category. It is
-not commercial, not shareware, not freeware, not GPL. The terms can be
-summarized as follows:
-
-1. You may download C-Kermit without license or fee for your own use
-or internal use within your company or institution.
-
-2. You may install C-Kermit without license or fee as a service or
-application on a computer within your company that is accessed by
-customers or clients. This provision would apply, for example, to an
-ISP or a medical claims clearinghouse.
-
-3. You may include C-Kermit with a "Free UNIX" or other Open Source
-operating-system distribution such as GNU/Linux, FreeBSD, NetBSD,
-OpenBSD, etc.
-
-4. Except as in (3), you may not sell or otherwise furnish C-Kermit as
-a software product, or a component of any product, to actual or
-potential customers or clients without a commercial license; to see
-the commercial license terms, CLICK HERE.
-
-In addition, we request that those who make more than casual use of
-C-Kermit purchase the published manual, Using C-Kermit. This helps
-them to get the most out of the software, it reduces the load on our
-help desk, and it helps to fund the Kermit Project.
-
-The Kermit Project must fund itself entirely out of income, which
-comes from software licenses, book sales, and support contracts. The
-C-Kermit licensing terms are designed to be as generous and fair as
-possible within this framework. Simply stated: if you just want to use
-it, be our guest. If you want us to help you use it, please consult
-the manual first. If you want to make a product or commodity of it,
-you have to pay for it.
-
+%description -l pl
+C-Kermit to pakiet do komunikacji zarówno szeregowej, jak i sieciowej,
+oferuj±cy spójny, niezale¿ny od medium, miêdzyplatformowy sposób
+ustanawiania po³±czenia, sesji terminalowych, przesy³ania i
+zarz±dzania plikami, translacji kodowania znaków, automatyki zadañ
+komunikacyjnych.
 
 %prep
 %setup -q -c
