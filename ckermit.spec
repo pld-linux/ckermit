@@ -95,9 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644, root, root, 755)
-%doc,{ckaaaa.txt,ckc197.txt,ckcbwr.txt,ckccfg.txt,ckcplm.txt}.gz
-%doc,{ckermit2.txt,ckuaaa.txt,ckubwr.txt,ckwart.txt,iksd.txt}.gz
-%doc,{security.txt,telnet.txt,COPYING.TXT}.gz
+%doc {ckaaaa.txt,ckc197.txt,ckcbwr.txt,ckccfg.txt,ckcplm.txt}.gz
+%doc {ckermit2.txt,ckuaaa.txt,ckubwr.txt,ckwart.txt,iksd.txt}.gz
+%doc {security.txt,telnet.txt,COPYING.TXT}.gz
 %dir %{_sysconfdir}/kermit
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/kermit/*
 %attr(755, root, root) %{_bindir}/kermit
