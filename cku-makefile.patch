@@ -1,0 +1,20 @@
+--- ckermit-7.0.197/makefile~	Sun Feb 27 23:05:52 2000
++++ ckermit-7.0.197/makefile	Thu Jul 13 19:08:11 2000
+@@ -4692,6 +4692,17 @@
+ 	-ldes -lkrb4 -ldes425 -lssl -lsslcrypto \
+ 	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl"
+ 
++linux-PLD+ssl+pam:
++	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,SRP,SSL...'
++	$(MAKE) krbmit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
++	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
++	-DCK_AUTHENTICATION -DCK_SHADOW \
++	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM \
++	-DCK_CURSES -DCK_POSIX_SIG -DTCPSOCKET -DLINUXFSSTND -DHAVE_CRYPT_H \
++	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
++	$(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
++	"LIBS = -lncurses -lgmp -lssl -lcrypto -lcrypt -lresolv -lpam -ldl"
++
+ linuxnotcp:
+ 	$(MAKE) linux KTARGET=$${KTARGET:-$(@)} "KFLAGS = -DNONET $(KFLAGS)"
+ 

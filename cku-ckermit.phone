@@ -1,0 +1,7 @@
+; /etc/kermit/ckermit.phone: system-wide dialing directory for C-Kermit
+; created 27-Jan-1997 jmk
+; autodate: 27-Jan-1997 
+; autotime: 04:08 
+
+; format:
+; name		+country-code (area-code) phone-number	; comment
