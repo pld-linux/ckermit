@@ -6,8 +6,6 @@ Release:	4
 License:	Special (see Copyright Notice)
 Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
-Group(de):	Applikationen/Kommunikation
-Group(pl):	Aplikacje/Komunikacja
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku197.tar.gz
 Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
