@@ -1,13 +1,13 @@
 Summary:	The quintessential all-purpose communications program
 Summary(pl):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
-Version:	8.0.208
+Version:	8.0.211
 Release:	1
 License:	Special (see Copyright Notice)
 Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
-Source0:	ftp://kermit.columbia.edu/kermit/archives/cku208.tar.gz
-# Source0-md5:	e00728a7d97d3dbdff6ee772a4848f82
+Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
+# Source0-md5:	e9e5f3e988a526e49cf177ca18719827
 Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
 Source3:	cku-%{name}.locale.ini
