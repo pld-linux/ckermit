@@ -7,6 +7,7 @@ License:	Special (see Copyright Notice)
 Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku208.tar.gz
+# Source0-md5:	e00728a7d97d3dbdff6ee772a4848f82
 Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
 Source3:	cku-%{name}.locale.ini
