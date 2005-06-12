@@ -1,0 +1,13 @@
+--- ckermit-8.0.211/ck_crp.c.orig	2004-03-14 18:05:52.000000000 +0100
++++ ckermit-8.0.211/ck_crp.c	2005-06-12 17:07:45.000000000 +0200
+@@ -467,8 +467,8 @@
+  * These function pointers point to the current routines
+  * for encrypting and decrypting data.
+  */
+-static VOID     (*encrypt_output) P((unsigned char *, int));
+-static int      (*decrypt_input) P((int));
++VOID     (*encrypt_output) P((unsigned char *, int));
++int      (*decrypt_input) P((int));
+ 
+ #ifdef DEBUG
+ static int encrypt_debug_mode = 1;

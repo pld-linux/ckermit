@@ -14,6 +14,7 @@ Source3:	cku-%{name}.locale.ini
 Source4:	cku-%{name}.phone
 Patch0:		cku-ssl-krb-srp.patch.gz
 Patch1:		cku-makefile.patch
+Patch2:		%{name}-gcc4.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -38,6 +39,7 @@ komunikacyjnych.
 %setup -q -c
 #%patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} linux-PLD+ssl+pam OPT="%{rpmcflags}" LNKFLAGS="%{rpmldflags}"
