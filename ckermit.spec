@@ -16,9 +16,9 @@ Patch0:		cku-ssl-krb-srp.patch.gz
 Patch1:		cku-makefile.patch
 Patch2:		%{name}-gcc4.patch
 URL:		http://www.columbia.edu/kermit/
-BuildRequires:	pam-devel
-BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	gmp-devel >= 3.1.1
+BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	pam-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -68,6 +68,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.txt COPYING.TXT
 
 %dir %{_sysconfdir}/kermit
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/kermit/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/kermit/*
 %attr(755, root, root) %{_bindir}/kermit
 %{_mandir}/man1/kermit.1*
