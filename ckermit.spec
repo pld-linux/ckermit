@@ -4,7 +4,6 @@ Name:		ckermit
 Version:	8.0.211
 Release:	1
 License:	Special (see Copyright Notice)
-Vendor:		The Kermit Project <kermit@columbia.edu>
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
 # Source0-md5:	e9e5f3e988a526e49cf177ca18719827
@@ -19,6 +18,7 @@ URL:		http://www.columbia.edu/kermit/
 BuildRequires:	gmp-devel >= 3.1.1
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
+BuildRequires:	perl-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,7 +54,7 @@ perl -pi -e "s|%{_prefix}/local/bin/kermit|%{_bindir}/kermit|g" ckermit.ini
 
 install krbmit $RPM_BUILD_ROOT%{_bindir}/kermit
 install ckuker.nr $RPM_BUILD_ROOT%{_mandir}/man1/kermit.1
-install ckermit.ini $RPM_BUILD_ROOT%{_sysconfdir}/kermit/
+install ckermit.ini $RPM_BUILD_ROOT%{_sysconfdir}/kermit
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.local.ini
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.modem.ini
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.locale.ini
@@ -66,7 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.txt COPYING.TXT
-
 %dir %{_sysconfdir}/kermit
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/kermit/*
 %attr(755, root, root) %{_bindir}/kermit
