@@ -1,5 +1,5 @@
 Summary:	The quintessential all-purpose communications program
-Summary(pl):	Kwintesencja programów komunikacyjnych
+Summary(pl.UTF-8):   Kwintesencja programÃ³w komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
 Release:	1
@@ -28,11 +28,11 @@ approach to connection establishment, terminal sessions, file transfer
 and management, character-set translation, and automation of
 communication tasks.
 
-%description -l pl
-C-Kermit to pakiet do komunikacji zarówno szeregowej, jak i sieciowej,
-oferuj±cy spójny, niezale¿ny od medium, miêdzyplatformowy sposób
-ustanawiania po³±czenia, sesji terminalowych, przesy³ania i
-zarz±dzania plikami, translacji kodowania znaków, automatyki zadañ
+%description -l pl.UTF-8
+C-Kermit to pakiet do komunikacji zarÃ³wno szeregowej, jak i sieciowej,
+oferujÄ…cy spÃ³jny, niezaleÅ¼ny od medium, miÄ™dzyplatformowy sposÃ³b
+ustanawiania poÅ‚Ä…czenia, sesji terminalowych, przesyÅ‚ania i
+zarzÄ…dzania plikami, translacji kodowania znakÃ³w, automatyki zadaÅ„
 komunikacyjnych.
 
 %prep
