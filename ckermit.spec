@@ -1,5 +1,5 @@
 Summary:	The quintessential all-purpose communications program
-Summary(pl.UTF-8):   Kwintesencja programów komunikacyjnych
+Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
 Release:	1
