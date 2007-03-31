@@ -13,6 +13,7 @@ Source3:	cku-%{name}.locale.ini
 Source4:	cku-%{name}.phone
 Patch0:		cku-makefile.patch
 Patch1:		%{name}-gcc4.patch
+Patch2:		%{name}-openssl-clash.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	krb5-devel
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -39,6 +40,7 @@ komunikacyjnych.
 %setup -q -c
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} linux-PLD+krb5+openssl+zlib+pam+shadow \
