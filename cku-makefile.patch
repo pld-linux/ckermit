@@ -12,7 +12,7 @@
 +	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \
 +	-DCK_CURSES -DCK_POSIX_SIG -DTCPSOCKET -DLINUXFSSTND -DHAVE_CRYPT_H \
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
-+	-I/usr/include/krb5 $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
++	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
 +	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi_krb5 \
 +	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl -lz"
 +
