@@ -2,7 +2,7 @@ Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
-Release:	1
+Release:	1.1
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
@@ -11,14 +11,14 @@ Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
 Source3:	cku-%{name}.locale.ini
 Source4:	cku-%{name}.phone
-Patch0:		cku-ssl-krb-srp.patch.gz
-Patch1:		cku-makefile.patch
-Patch2:		%{name}-gcc4.patch
+Patch0:		cku-makefile.patch
+Patch1:		%{name}-gcc4.patch
 URL:		http://www.columbia.edu/kermit/
-BuildRequires:	gmp-devel >= 3.1.1
+BuildRequires:	krb5-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,14 +37,13 @@ komunikacyjnych.
 
 %prep
 %setup -q -c
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
-%{__make} linux-PLD+ssl+pam OPT="%{rpmcflags}" LNKFLAGS="%{rpmldflags}"
-#make linux-pld-ssl-srp-pam OPT="%{rpmcflags}" LDFLAGS="%{rpmldflags}"
-#make linux-pld-krb-ssl-srp-pam OPT="%{rpmcflags}" LDFLAGS="%{rpmldflags}"
+%{__make} linux-PLD+krb5+openssl+zlib+pam+shadow \
+	OPT="%{rpmcflags}" \
+	LNKFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -52,7 +51,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/kermit}
 
 perl -pi -e "s|%{_prefix}/local/bin/kermit|%{_bindir}/kermit|g" ckermit.ini
 
-install krbmit $RPM_BUILD_ROOT%{_bindir}/kermit
+install xermit $RPM_BUILD_ROOT%{_bindir}/kermit
 install ckuker.nr $RPM_BUILD_ROOT%{_mandir}/man1/kermit.1
 install ckermit.ini $RPM_BUILD_ROOT%{_sysconfdir}/kermit
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.local.ini
