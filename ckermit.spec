@@ -16,6 +16,7 @@ Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-openssl-clash.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	krb5-devel
+BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
