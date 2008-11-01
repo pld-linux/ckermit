@@ -11,7 +11,7 @@
 +	-DCK_AUTHENTICATION -DCK_KERBEROS -DKRB5 -DCK_SHADOW -DOPENSSL_097 \
 +	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \
 +	-DCK_CURSES -DCK_POSIX_SIG -DTCPSOCKET -DLINUXFSSTND -DHAVE_CRYPT_H \
-+	-DMIT_CURRENT \
++	\
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
 +	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi_krb5 \
