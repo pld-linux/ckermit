@@ -2,7 +2,7 @@ Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
-Release:	1.1
+Release:	2
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
@@ -14,6 +14,7 @@ Source4:	cku-%{name}.phone
 Patch0:		cku-makefile.patch
 Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-openssl-clash.patch
+Patch3:		%{name}-krb.patch
 URL:		http://www.columbia.edu/kermit/
 BuildRequires:	krb5-devel
 BuildRequires:	ncurses-devel
@@ -42,6 +43,7 @@ komunikacyjnych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
 
 %build
 %{__make} linux-PLD+krb5+openssl+zlib+pam+shadow \
@@ -54,7 +56,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_sysconfdir}/kermit}
 
 perl -pi -e "s|%{_prefix}/local/bin/kermit|%{_bindir}/kermit|g" ckermit.ini
 
-install xermit $RPM_BUILD_ROOT%{_bindir}/kermit
+install wermit $RPM_BUILD_ROOT%{_bindir}/kermit
 install ckuker.nr $RPM_BUILD_ROOT%{_mandir}/man1/kermit.1
 install ckermit.ini $RPM_BUILD_ROOT%{_sysconfdir}/kermit
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/kermit/ckermit.local.ini
