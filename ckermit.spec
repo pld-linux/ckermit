@@ -2,7 +2,7 @@ Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
-Release:	2
+Release:	3
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
@@ -14,9 +14,8 @@ Source4:	cku-%{name}.phone
 Patch0:		cku-makefile.patch
 Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-openssl-clash.patch
-Patch3:		%{name}-krb.patch
 URL:		http://www.columbia.edu/kermit/
-BuildRequires:	krb5-devel
+BuildRequires:	heimdal-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
@@ -43,7 +42,6 @@ komunikacyjnych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p0
 
 %build
 %{__make} linux-PLD+krb5+openssl+zlib+pam+shadow \
