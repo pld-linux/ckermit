@@ -1,6 +1,6 @@
 --- ckermit-7.0.197/makefile~	Sun Feb 27 23:05:52 2000
 +++ ckermit-7.0.197/makefile	Thu Jul 13 19:08:11 2000
-@@ -4692,6 +4692,19 @@
+@@ -4692,6 +4692,45 @@
  	-ldes -lkrb4 -ldes425 -lssl -lsslcrypto \
  	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl"
  
@@ -16,6 +16,32 @@
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
 +	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi_krb5 \
 +	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl -lz"
++
++linux-PLD+krb5heimdal+openssl+zlib+pam+shadow:
++	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
++	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
++	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
++	-DCK_AUTHENTICATION -DCK_KERBEROS -DKRB5 -DCK_SHADOW -DOPENSSL_097 \
++	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \
++	-DCK_CURSES -DCK_POSIX_SIG -DTCPSOCKET -DLINUXFSSTND -DHAVE_CRYPT_H \
++	-DHEIMDAL \
++	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
++	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
++	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi \
++	-lkrb5 -lcom_err -lcrypt -lresolv -lpam -ldl -lz"
++
++linux-PLD+openssl+zlib+pam+shadow:
++	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
++	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
++	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
++	-DCK_AUTHENTICATION -DCK_SHADOW -DOPENSSL_097 \
++	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \
++	-DCK_CURSES -DCK_POSIX_SIG -DTCPSOCKET -DLINUXFSSTND -DHAVE_CRYPT_H \
++	\
++	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
++	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
++	"LIBS = -lm -lncurses -lssl -lcrypto \
++	-lcrypt -lresolv -lpam -ldl -lz"
 +
  linuxnotcp:
  	$(MAKE) linux KTARGET=$${KTARGET:-$(@)} "KFLAGS = -DNONET $(KFLAGS)"
