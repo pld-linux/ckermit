@@ -1,8 +1,12 @@
+#
+# Conditional build:
+%bcond_with	kerberos5	# build with kerberos5 support
+#
 Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
-Release:	3
+Release:	4
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
@@ -15,7 +19,7 @@ Patch0:		cku-makefile.patch
 Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-openssl-clash.patch
 URL:		http://www.columbia.edu/kermit/
-BuildRequires:	heimdal-devel
+%{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
@@ -44,7 +48,11 @@ komunikacyjnych.
 %patch2 -p1
 
 %build
-%{__make} linux-PLD+krb5+openssl+zlib+pam+shadow \
+%if %{with kerberos5}
+%{__make} linux-PLD+krb5heimdal+openssl+zlib+pam+shadow \
+%else
+%{__make} linux-PLD+openssl+zlib+pam+shadow \
+%endif
 	OPT="%{rpmcflags}" \
 	LNKFLAGS="%{rpmldflags}"
 
