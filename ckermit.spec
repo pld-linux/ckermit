@@ -6,7 +6,7 @@ Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	8.0.211
-Release:	4
+Release:	5
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
