@@ -6,7 +6,7 @@
  
 +linux-PLD+krb5+openssl+zlib+pam+shadow:
 +	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
-+	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
++	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = $(CC)" "CC2 = $(CC)" \
 +	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
 +	-DCK_AUTHENTICATION -DCK_KERBEROS -DKRB5 -DCK_SHADOW -DOPENSSL_097 \
 +	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \
@@ -19,7 +19,7 @@
 +
 +linux-PLD+krb5heimdal+openssl+zlib+pam+shadow:
 +	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
-+	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
++	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = $(CC)" "CC2 = $(CC)" \
 +	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
 +	-DCK_AUTHENTICATION -DCK_KERBEROS -DKRB5 -DCK_SHADOW -DOPENSSL_097 \
 +	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \
@@ -32,7 +32,7 @@
 +
 +linux-PLD+openssl+zlib+pam+shadow:
 +	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
-+	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = gcc" "CC2 = gcc" \
++	$(MAKE) xermit KTARGET=$${KTARGET:-$(@)} "CC = $(CC)" "CC2 = $(CC)" \
 +	"CFLAGS = $(OPT) -funsigned-char -pipe -DPOSIX -DLINUX -DNOCOTFMC \
 +	-DCK_AUTHENTICATION -DCK_SHADOW -DOPENSSL_097 \
 +	-DCK_ENCRYPTION -DCK_CAST -DCK_DES -DLIBDES -DCK_SSL -DCK_PAM -DZLIB \

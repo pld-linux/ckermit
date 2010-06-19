@@ -53,6 +53,8 @@ komunikacyjnych.
 %else
 %{__make} linux-PLD+openssl+zlib+pam+shadow \
 %endif
+	CC="%{__cc}" \
+	CC2="%{__cc}" \
 	OPT="%{rpmcflags}" \
 	LNKFLAGS="%{rpmldflags}"
 
