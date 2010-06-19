@@ -15,7 +15,7 @@
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
 +	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi_krb5 \
-+	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl -lz"
++	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl -lz -ltinfo"
 +
 +linux-PLD+krb5heimdal+openssl+zlib+pam+shadow:
 +	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
@@ -28,7 +28,7 @@
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
 +	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi \
-+	-lkrb5 -lcom_err -lcrypt -lresolv -lpam -ldl -lz"
++	-lkrb5 -lcom_err -lcrypt -lresolv -lpam -ldl -lz -ltinfo"
 +
 +linux-PLD+openssl+zlib+pam+shadow:
 +	@echo 'Making C-Kermit $(CKVER) for Linux on i386 with PAM,KRB5,SSL...'
@@ -41,7 +41,7 @@
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
 +	"LIBS = -lm -lncurses -lssl -lcrypto \
-+	-lcrypt -lresolv -lpam -ldl -lz"
++	-lcrypt -lresolv -lpam -ldl -lz -ltinfo"
 +
  linuxnotcp:
  	$(MAKE) linux KTARGET=$${KTARGET:-$(@)} "KFLAGS = -DNONET $(KFLAGS)"
