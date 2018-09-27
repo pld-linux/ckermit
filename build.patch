@@ -1,0 +1,18 @@
+--- ckermit-8.0.211/ckucmd.c~	2004-01-07 19:04:04.000000000 +0100
++++ ckermit-8.0.211/ckucmd.c	2018-09-15 22:40:21.511061428 +0200
+@@ -7115,7 +7115,6 @@ cmdconchk() {
+ #ifdef NOARROWKEYS
+     debug(F101,"cmdconchk NOARROWKEYS x","",0);
+ #else
+-    debug(F101,"cmdconchk stdin->_cnt","",stdin->_cnt);
+     x = stdin->_cnt;
+ #endif /* NOARROWKEYS */
+ #endif /* VMS */
+@@ -7123,7 +7122,6 @@ cmdconchk() {
+     if (x < 0) x = 0;
+ #else  /* USE_FILE_CNT */
+ #ifdef USE_FILE__CNT			/* HP-UX */
+-    debug(F101,"cmdconchk stdin->__cnt","",stdin->__cnt);
+     x = stdin->__cnt;
+     if (x == 0) x = conchk();
+     if (x < 0) x = 0;

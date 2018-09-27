@@ -18,6 +18,8 @@ Source4:	cku-%{name}.phone
 Patch0:		cku-makefile.patch
 Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-openssl-clash.patch
+Patch3:		build.patch
+Patch4:		050-consider-OPENSSL_NO_SSL3.patch
 URL:		http://www.columbia.edu/kermit/
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	ncurses-devel
@@ -46,6 +48,8 @@ komunikacyjnych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 %if %{with kerberos5}
@@ -55,7 +59,7 @@ komunikacyjnych.
 %endif
 	CC="%{__cc}" \
 	CC2="%{__cc}" \
-	OPT="%{rpmcflags}" \
+	OPT="%{rpmcflags} -DNOARROWKEYS=1" \
 	LNKFLAGS="%{rpmldflags}"
 
 %install
