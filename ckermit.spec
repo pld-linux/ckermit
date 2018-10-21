@@ -6,7 +6,7 @@ Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
 Version:	9.0.302
-Release:	0.1
+Release:	1
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
 Source0:	ftp://kermit.columbia.edu/kermit/archives/cku302.tar.gz
@@ -16,9 +16,9 @@ Source2:	cku-%{name}.modem.generic.ini
 Source3:	cku-%{name}.locale.ini
 Source4:	cku-%{name}.phone
 Patch0:		cku-makefile.patch
-Patch1:		%{name}-gcc4.patch
 Patch3:		build.patch
 Patch4:		050-consider-OPENSSL_NO_SSL3.patch
+Patch5:		openssl-1.1.1.patch
 URL:		http://www.columbia.edu/kermit/
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	ncurses-devel
@@ -45,9 +45,9 @@ komunikacyjnych.
 %prep
 %setup -q -c
 %patch0 -p1
-#%patch1 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %if %{with kerberos5}

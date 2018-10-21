@@ -1,0 +1,535 @@
+diff -ur ckermit-9.0.302/ck_crp.c ckermit-9.0.302.openssl111/ck_crp.c
+--- ckermit-9.0.302/ck_crp.c	2011-08-20 23:02:21.000000000 +0200
++++ ckermit-9.0.302.openssl111/ck_crp.c	2018-10-21 13:18:30.581182834 +0200
+@@ -295,7 +295,7 @@
+ #define des_new_random_key            des_random_key
+ #define des_set_random_generator_seed des_random_seed
+ #endif /* UNIX */
+-#define des_fixup_key_parity          des_set_odd_parity
++#define des_fixup_key_parity          DES_set_odd_parity
+ #ifdef OPENSSL_097
+ #define OPENSSL_ENABLE_OLD_DES_SUPPORT
+ #include <openssl/des.h>
+@@ -394,7 +394,7 @@
+ void
+ des_set_random_generator_seed(Block B)
+ {
+-    des_random_seed(B);
++//    DES_random_seed(B);
+     return;
+ }
+ 
+@@ -403,7 +403,7 @@
+ void
+ des_fixup_key_parity(Block B)
+ {
+-    des_set_odd_parity(B);
++    DES_set_odd_parity(B);
+     return;
+ }
+ #endif /* COMMENT */
+@@ -415,7 +415,7 @@
+        This might need to have the "rc = " removed because this
+        is VOID in later, and maybe even all, versions.
+     */       
+-    rc = des_random_key(B);
++    rc = DES_random_key(B);
+     return(rc);
+ }
+ 
+@@ -2138,8 +2138,9 @@
+         }
+ 
+ #else /* MIT_CURRENT */
+-        des_new_random_key(fbp->temp_feed);
+-        des_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
++        DES_random_key(fbp->temp_feed);
++	int DES_random_key(DES_cblock *ret);
++        DES_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
+                          fbp->krbdes_sched, 1);
+ #endif /* MIT_CURRENT */
+         p = fbp->fb_feed + 3;
+@@ -2457,14 +2458,14 @@
+     fb64_stream_key(fbp->krbdes_key, c_stream);
+ 
+     if (fbp->once == 0) {
+-        des_set_random_generator_seed(fbp->krbdes_key);
++//        DES_set_random_generator_seed(fbp->krbdes_key);
+         fbp->once = 1;
+     }
+ 
+     memset(fbp->krbdes_sched,0,sizeof(Schedule));
+     ckhexdump("fb64_session_key",fbp->krbdes_key,8);
+ 
+-    rc = des_key_sched(fbp->krbdes_key, fbp->krbdes_sched);
++    rc = DES_key_sched(fbp->krbdes_key, fbp->krbdes_sched);
+     if ( rc == -1 ) {
+         printf("?Invalid DES key specified for encryption\n");
+         debug(F110,"fb64_session_key",
+@@ -2620,7 +2621,7 @@
+     ckhexdump("fb64_stream_iv",stp->str_ikey,8);
+ 
+ #ifndef MIT_CURRENT
+-    rc = des_key_sched(stp->str_ikey, stp->str_sched);
++    rc = DES_key_sched(stp->str_ikey, stp->str_sched);
+     if ( rc == -1 ) {
+         printf("?Invalid DES key specified for encryption\r\n");
+         debug(F110,"fb64_stream_iv",
+@@ -2662,7 +2663,7 @@
+ 
+     ckhexdump("fb64_stream_key",key,8);
+ 
+-    rc = des_key_sched(key, stp->str_sched);
++    rc = DES_key_sched(key, stp->str_sched);
+     if ( rc == -1 ) {
+         printf("?Invalid DES key specified for encryption\r\n");
+         debug(F110,"fb64_stream_key",
+@@ -2721,7 +2722,7 @@
+ #ifdef MIT_CURRENT
+             ecb_encrypt(stp, stp->str_output, b);
+ #else /* MIT_CURRENT */
+-            des_ecb_encrypt(stp->str_output, b, stp->str_sched, 1);
++            DES_ecb_encrypt(stp->str_output, b, stp->str_sched, 1);
+ #endif /* MIT_CURRENT */
+             memcpy(stp->str_feed,b,sizeof(Block));
+             index = 0;
+@@ -2759,7 +2760,7 @@
+ #ifdef MIT_CURRENT
+         ecb_encrypt(stp, stp->str_output, b);
+ #else /* MIT_CURRENT */
+-        des_ecb_encrypt(stp->str_output, b, stp->str_sched, 1);
++        DES_ecb_encrypt(stp->str_output, b, stp->str_sched, 1);
+ #endif /* MIT_CURRENT */
+         memcpy(stp->str_feed, b, sizeof(Block));
+         stp->str_index = 1;     /* Next time will be 1 */
+@@ -2805,7 +2806,7 @@
+ #ifdef MIT_CURRENT
+             ecb_encrypt(stp, stp->str_feed, b);
+ #else /* MIT_CURRENT */
+-            des_ecb_encrypt(stp->str_feed, b, stp->str_sched, 1);
++            DES_ecb_encrypt(stp->str_feed, b, stp->str_sched, 1);
+ #endif /* MIT_CURRENT */
+             memcpy(stp->str_feed,b,sizeof(Block));
+             index = 0;
+@@ -2840,7 +2841,7 @@
+ #ifdef MIT_CURRENT
+         ecb_encrypt(stp, stp->str_feed, b);
+ #else /* MIT_CURRENT */
+-        des_ecb_encrypt(stp->str_feed, b, stp->str_sched, 1);
++        DES_ecb_encrypt(stp->str_feed, b, stp->str_sched, 1);
+ #endif /* MIT_CURRENT */
+         memcpy(stp->str_feed, b, sizeof(Block));
+         stp->str_index = 1;     /* Next time will be 1 */
+@@ -2955,19 +2956,19 @@
+         /*
+         * Create a random feed and send it over.
+         */
+-        des_new_random_key(fbp->temp_feed);
++        DES_random_key(fbp->temp_feed);
+ #ifdef LIBDES
+-        des_ecb3_encrypt(fbp->temp_feed, fbp->temp_feed,
++        DES_ecb3_encrypt(fbp->temp_feed, fbp->temp_feed,
+                          fbp->krbdes_sched[0],
+                          fbp->krbdes_sched[1],
+                          fbp->krbdes_sched[2],
+                          1);
+ #else /* LIBDES */
+-        des_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
++        DES_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
+                          fbp->krbdes_sched[0], 1);
+-        des_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
++        DES_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
+                          fbp->krbdes_sched[1], 0);
+-        des_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
++        DES_ecb_encrypt(fbp->temp_feed, fbp->temp_feed,
+                          fbp->krbdes_sched[2], 1);
+ #endif /* LIBDES */
+ 
+@@ -3274,7 +3275,7 @@
+             sizeof(Block)
+             );
+     if (fbp->once == 0) {
+-        des_set_random_generator_seed(fbp->krbdes_key[0]);
++//        DES_set_random_generator_seed(fbp->krbdes_key[0]);
+         fbp->once = 1;
+     }
+ 
+@@ -3333,7 +3334,7 @@
+     for ( i=0;i<3;i++ ) {
+         memset(fbp->krbdes_sched[i],0,sizeof(Schedule));
+ 
+-        rc = des_key_sched(fbp->krbdes_key[i], fbp->krbdes_sched[i]);
++        rc = DES_key_sched(fbp->krbdes_key[i], fbp->krbdes_sched[i]);
+         if ( rc == -1 ) {
+             printf("?Invalid DES key specified for encryption [DES3,%s]\r\n",
+                     server?"server":"client");
+@@ -3488,7 +3489,7 @@
+ 
+         ckhexdump("des3_fb64_stream_iv",stp->str_ikey[i],8);
+ 
+-        rc = des_key_sched(stp->str_ikey[i], stp->str_sched[i]);
++        rc = DES_key_sched(stp->str_ikey[i], stp->str_sched[i]);
+         if ( rc == -1 ) {
+             printf("?Invalid DES key specified for encryption [DES3 iv]\r\n");
+             debug(F110,"des3_fb64_stream_iv",
+@@ -3521,7 +3522,7 @@
+ 
+         ckhexdump("des3_fb64_stream_key",key[i],8);
+ 
+-        rc = des_key_sched(key[i], stp->str_sched[i]);
++        rc = DES_key_sched(key[i], stp->str_sched[i]);
+         if ( rc == -1 ) {
+             printf("?Invalid DES key specified for encryption [DES3 key]\r\n");
+             debug(F110,"des3_fb64_stream_key",
+@@ -3580,14 +3581,14 @@
+         if (index == sizeof(Block)) {
+             Block b;
+ #ifdef LIBDES
+-            des_ecb3_encrypt(stp->str_output, b, stp->str_sched[0],
++            DES_ecb3_encrypt(stp->str_output, b, stp->str_sched[0],
+                               stp->str_sched[1], stp->str_sched[2], 1);
+ #else /* LIBDES */
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[0], 1);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[1], 0);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[2], 1);
+ #endif /* LIBDES */
+             memcpy(stp->str_feed,b,sizeof(Block));
+@@ -3624,14 +3625,14 @@
+     if (index == sizeof(Block)) {
+         Block b;
+ #ifdef LIBDES
+-        des_ecb3_encrypt(stp->str_output, b, stp->str_sched[0],
++        DES_ecb3_encrypt(stp->str_output, b, stp->str_sched[0],
+                           stp->str_sched[1], stp->str_sched[2], 1);
+ #else /* LIBDES */
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[0], 1);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[1], 0);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[2], 1);
+ #endif /* LIBDES */
+         memcpy(stp->str_feed, b, sizeof(Block));
+@@ -3680,14 +3681,14 @@
+         if (index == sizeof(Block)) {
+             Block b;
+ #ifdef LIBDES
+-            des_ecb3_encrypt(stp->str_feed, b, stp->str_sched[0],
++            DES_ecb3_encrypt(stp->str_feed, b, stp->str_sched[0],
+                              stp->str_sched[1], stp->str_sched[2], 1);
+ #else /* LIBDES */
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[0], 1);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[1], 0);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[2], 1);
+ #endif /* LIBDES */
+             memcpy(stp->str_feed,b,sizeof(Block));
+@@ -3721,14 +3722,14 @@
+     if (index == sizeof(Block)) {
+         Block b;
+ #ifdef LIBDES
+-        des_ecb3_encrypt(stp->str_feed, b, stp->str_sched[0],
++        DES_ecb3_encrypt(stp->str_feed, b, stp->str_sched[0],
+                           stp->str_sched[1], stp->str_sched[2], 1);
+ #else /* LIBDES */
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[0], 1);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[1], 0);
+-            des_ecb_encrypt(stp->str_output, b,
++            DES_ecb_encrypt(stp->str_output, b,
+                              stp->str_sched[2], 1);
+ #endif /* LIBDES */
+         memcpy(stp->str_feed, b, sizeof(Block));
+diff -ur ckermit-9.0.302/ck_ssl.c ckermit-9.0.302.openssl111/ck_ssl.c
+--- ckermit-9.0.302/ck_ssl.c	2018-10-21 13:19:06.894962175 +0200
++++ ckermit-9.0.302.openssl111/ck_ssl.c	2018-10-21 13:05:08.874620118 +0200
+@@ -301,7 +301,7 @@
+                 break;
+             default:
+                 printf("Error %d while verifying certificate.\r\n",
+-                       ctx->error);
++                       X509_STORE_CTX_get_error(ctx));
+                 break;
+             }
+         }
+@@ -936,10 +936,12 @@
+ 
+     if ((dh=DH_new()) == NULL)
+         return(NULL);
+-    dh->p=BN_bin2bn(dh512_p,sizeof(dh512_p),NULL);
+-    dh->g=BN_bin2bn(dh512_g,sizeof(dh512_g),NULL);
+-    if ((dh->p == NULL) || (dh->g == NULL))
++    BIGNUM *p=BN_bin2bn(dh512_p,sizeof(dh512_p),NULL);
++    BIGNUM *g=BN_bin2bn(dh512_g,sizeof(dh512_g),NULL);
++    if (DH_set0_pqg(dh, p, NULL, g) == 0) {
++        DH_free(dh);
+         return(NULL);
++    }
+     return(dh);
+ }
+ 
+@@ -950,10 +952,12 @@
+ 
+     if ((dh=DH_new()) == NULL)
+         return(NULL);
+-    dh->p=BN_bin2bn(dh768_p,sizeof(dh768_p),NULL);
+-    dh->g=BN_bin2bn(dh768_g,sizeof(dh768_g),NULL);
+-    if ((dh->p == NULL) || (dh->g == NULL))
++    BIGNUM *p=BN_bin2bn(dh768_p,sizeof(dh768_p),NULL);
++    BIGNUM *g=BN_bin2bn(dh768_g,sizeof(dh768_g),NULL);
++    if (DH_set0_pqg(dh, p, NULL, g) == 0) {
++        DH_free(dh);
+         return(NULL);
++    }
+     return(dh);
+ }
+ 
+@@ -964,10 +968,12 @@
+ 
+     if ((dh=DH_new()) == NULL)
+         return(NULL);
+-    dh->p=BN_bin2bn(dh1024_p,sizeof(dh1024_p),NULL);
+-    dh->g=BN_bin2bn(dh1024_g,sizeof(dh1024_g),NULL);
+-    if ((dh->p == NULL) || (dh->g == NULL))
++    BIGNUM *p=BN_bin2bn(dh1024_p,sizeof(dh1024_p),NULL);
++    BIGNUM *g=BN_bin2bn(dh1024_g,sizeof(dh1024_g),NULL);
++    if (DH_set0_pqg(dh, p, NULL, g) == 0) {
++        DH_free(dh);
+         return(NULL);
++    }
+     return(dh);
+ }
+ 
+@@ -978,10 +984,12 @@
+ 
+     if ((dh=DH_new()) == NULL)
+         return(NULL);
+-    dh->p=BN_bin2bn(dh1536_p,sizeof(dh1536_p),NULL);
+-    dh->g=BN_bin2bn(dh1536_g,sizeof(dh1536_g),NULL);
+-    if ((dh->p == NULL) || (dh->g == NULL))
++    BIGNUM *p=BN_bin2bn(dh1536_p,sizeof(dh1536_p),NULL);
++    BIGNUM *g=BN_bin2bn(dh1536_g,sizeof(dh1536_g),NULL);
++    if (DH_set0_pqg(dh, p, NULL, g) == 0) {
++        DH_free(dh);
+         return(NULL);
++    }
+     return(dh);
+ }
+ 
+@@ -992,10 +1000,12 @@
+ 
+     if ((dh=DH_new()) == NULL)
+         return(NULL);
+-    dh->p=BN_bin2bn(dh2048_p,sizeof(dh2048_p),NULL);
+-    dh->g=BN_bin2bn(dh2048_g,sizeof(dh2048_g),NULL);
+-    if ((dh->p == NULL) || (dh->g == NULL))
++    BIGNUM *p=BN_bin2bn(dh2048_p,sizeof(dh2048_p),NULL);
++    BIGNUM *g=BN_bin2bn(dh2048_g,sizeof(dh2048_g),NULL);
++    if (DH_set0_pqg(dh, p, NULL, g) == 0) {
++        DH_free(dh);
+         return(NULL);
++    }
+     return(dh);
+ }
+ #endif /* NO_DH */
+@@ -1054,11 +1064,15 @@
+     if (ssl == NULL)
+         return;
+ 
++#if 0
+     if (ssl->expand == NULL || ssl->expand->meth == NULL)
++#endif
+         printf("Compression: None\r\n");
++#if 0
+     else {
+         printf("Compression: %s\r\n",ssl->expand->meth->name);
+     }
++#endif
+ }
+ 
+ int
+@@ -1457,13 +1471,15 @@
+ 
+ #ifdef ZLIB
+     cm = COMP_zlib();
+-    if (cm != NULL && cm->type != NID_undef) {
++    if (cm != NULL && COMP_get_type(cm) != NID_undef) {
+         SSL_COMP_add_compression_method(0xe0, cm); /* EAY's ZLIB ID */
+     }
+ #endif /* ZLIB */
++#ifdef COMP_RLE
+     cm = COMP_rle();
+-    if (cm != NULL && cm->type != NID_undef)
++    if (cm != NULL && COMP_get_type(cm) != NID_undef)
+         SSL_COMP_add_compression_method(0xe1, cm); /* EAY's RLE ID */
++#endif
+ 
+     /* Ensure the Random number generator has enough entropy */
+     if ( !RAND_status() ) {
+@@ -1483,14 +1499,10 @@
+         }
+         debug(F110,"ssl_rnd_file",ssl_rnd_file,0);
+ 
+-        rc1 = RAND_egd(ssl_rnd_file);
+-        debug(F111,"ssl_once_init","RAND_egd()",rc1);
+-        if ( rc1 <= 0 ) {
+-            rc2 = RAND_load_file(ssl_rnd_file, -1);
+-            debug(F111,"ssl_once_init","RAND_load_file()",rc1);
+-        }
++        rc2 = RAND_load_file(ssl_rnd_file, -1);
++        debug(F111,"ssl_once_init","RAND_load_file()",rc2);
+ 
+-        if ( rc1 <= 0 && !rc2 )
++        if ( !rc2 )
+         {
+             time_t t = time(NULL);
+             int tlen = sizeof(time_t);
+@@ -2583,14 +2595,13 @@
+ int
+ ssl_verify_crl(int ok, X509_STORE_CTX *ctx)
+ {
+-    X509_OBJECT obj;
++    X509_OBJECT *obj;
+     X509_NAME *subject = NULL;
+     X509_NAME *issuer = NULL;
+     X509 *xs = NULL;
+     X509_CRL *crl = NULL;
+     X509_REVOKED *revoked = NULL;
+     X509_STORE_CTX * store_ctx = NULL;
+-    long serial;
+     BIO *bio = NULL;
+     int i, n, rc;
+     char *cp;
+@@ -2607,6 +2618,11 @@
+     if ( !store_ctx )
+         return(ok);
+ 
++    obj = X509_OBJECT_new();
++    if ( !obj ) {
++        X509_STORE_CTX_free(store_ctx);
++        return(ok);
++    }
+     /*
+      * Determine certificate ingredients in advance
+      */
+@@ -2649,11 +2665,10 @@
+      * Try to retrieve a CRL corresponding to the _subject_ of
+      * the current certificate in order to verify it's integrity.
+      */
+-    memset((char *)&obj, 0, sizeof(obj));
+     X509_STORE_CTX_init(store_ctx, crl_store, NULL, NULL);
+-    rc = X509_STORE_get_by_subject(store_ctx, X509_LU_CRL, subject, &obj);
++    rc = X509_STORE_get_by_subject(store_ctx, X509_LU_CRL, subject, obj);
+     X509_STORE_CTX_cleanup(store_ctx);
+-    crl = obj.data.crl;
++    crl = X509_OBJECT_get0_X509_CRL(obj);
+     if (rc > 0 && crl != NULL) {
+         /*
+          * Verify the signature on this CRL
+@@ -2661,7 +2676,7 @@
+         if (X509_CRL_verify(crl, X509_get_pubkey(xs)) <= 0) {
+             fprintf(stderr, "Invalid signature on CRL!\n");
+             X509_STORE_CTX_set_error(ctx, X509_V_ERR_CRL_SIGNATURE_FAILURE);
+-            X509_OBJECT_free_contents(&obj);
++            X509_OBJECT_free(obj);
+             X509_STORE_CTX_free(store_ctx);
+             return 0;
+         }
+@@ -2674,7 +2689,7 @@
+             fprintf(stderr, "Found CRL has invalid nextUpdate field.\n");
+             X509_STORE_CTX_set_error(ctx,
+                                     X509_V_ERR_ERROR_IN_CRL_NEXT_UPDATE_FIELD);
+-            X509_OBJECT_free_contents(&obj);
++            X509_OBJECT_free(obj);
+             X509_STORE_CTX_free(store_ctx);
+             return 0;
+         }
+@@ -2683,22 +2698,20 @@
+ "Found CRL is expired - revoking all certificates until you get updated CRL.\n"
+                     );
+             X509_STORE_CTX_set_error(ctx, X509_V_ERR_CRL_HAS_EXPIRED);
+-            X509_OBJECT_free_contents(&obj);
++            X509_OBJECT_free(obj);
+             X509_STORE_CTX_free(store_ctx);
+             return 0;
+         }
+-        X509_OBJECT_free_contents(&obj);
+     }
+ 
+     /*
+      * Try to retrieve a CRL corresponding to the _issuer_ of
+      * the current certificate in order to check for revocation.
+      */
+-    memset((char *)&obj, 0, sizeof(obj));
+     X509_STORE_CTX_init(store_ctx, crl_store, NULL, NULL);
+-    rc = X509_STORE_get_by_subject(store_ctx, X509_LU_CRL, issuer, &obj);
++    rc = X509_STORE_get_by_subject(store_ctx, X509_LU_CRL, issuer, obj);
+     X509_STORE_CTX_free(store_ctx);		/* calls X509_STORE_CTX_cleanup() */
+-    crl = obj.data.crl;
++    crl = X509_OBJECT_get0_X509_CRL(obj);
+     if (rc > 0 && crl != NULL) {
+         /*
+          * Check if the current certificate is revoked by this CRL
+@@ -2706,20 +2719,17 @@
+         n = sk_X509_REVOKED_num(X509_CRL_get_REVOKED(crl));
+         for (i = 0; i < n; i++) {
+             revoked = sk_X509_REVOKED_value(X509_CRL_get_REVOKED(crl), i);
+-            if (ASN1_INTEGER_cmp(revoked->serialNumber,
++            if (ASN1_INTEGER_cmp(X509_REVOKED_get0_serialNumber(revoked),
+                                  X509_get_serialNumber(xs)) == 0) {
+ 
+-                serial = ASN1_INTEGER_get(revoked->serialNumber);
+-                cp = X509_NAME_oneline(issuer, NULL, 0);
+-                free(cp);
+-
+                 X509_STORE_CTX_set_error(ctx, X509_V_ERR_CERT_REVOKED);
+-                X509_OBJECT_free_contents(&obj);
++                X509_OBJECT_free(obj);
+                 return 0;
+             }
+         }
+-        X509_OBJECT_free_contents(&obj);
+     }
++    X509_OBJECT_free(obj);
++    X509_STORE_CTX_free(store_ctx);
+     return ok;
+ }
+ 
+@@ -4338,6 +4348,8 @@
+     FILE *fp;
+     struct passwd *pwd;
+     X509 *file_cert;
++    const ASN1_BIT_STRING *peer_sig, *file_sig;
++    const X509_ALGOR *peer_alg, *file_alg;
+ 
+     if ( peer_cert == NULL )
+         return(0);
+@@ -4350,8 +4362,10 @@
+ 
+     if (!(fp = fopen(buf, "r")))
+         return 0;
++    X509_get0_signature(&peer_sig, &peer_alg, peer_cert);
+     while (!r && (file_cert = PEM_read_X509(fp, NULL, NULL, NULL))) {
+-        if (!ASN1_STRING_cmp(peer_cert->signature, file_cert->signature))
++        X509_get0_signature(&file_sig, &file_alg, file_cert);
++        if (!ASN1_STRING_cmp(peer_sig, file_sig))
+             r = 1;
+         X509_free(file_cert);
+     }

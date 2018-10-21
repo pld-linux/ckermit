@@ -14,7 +14,7 @@
 +	\
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
-+	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi_krb5 \
++	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi_krb5 -lutil \
 +	-lkrb5 -lcom_err -lk5crypto -lcrypt -lresolv -lpam -ldl -lz -ltinfo"
 +
 +linux-PLD+krb5heimdal+openssl+zlib+pam+shadow:
@@ -27,7 +27,7 @@
 +	-DHEIMDAL \
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
-+	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi \
++	"LIBS = -lm -lncurses -lssl -lcrypto -lgssapi -lutil \
 +	-lkrb5 -lcom_err -lcrypt -lresolv -lpam -ldl -lz -ltinfo"
 +
 +linux-PLD+openssl+zlib+pam+shadow:
@@ -40,7 +40,7 @@
 +	\
 +	-I/usr/include/security -I/usr/include/openssl -I/usr/include/ncurses \
 +	-I/usr/include/krb5 -I/usr/include/et $(KFLAGS)" "LNKFLAGS = $(LNKFLAGS)" \
-+	"LIBS = -lm -lncurses -lssl -lcrypto \
++	"LIBS = -lm -lncurses -lssl -lcrypto -lutil \
 +	-lcrypt -lresolv -lpam -ldl -lz -ltinfo"
 +
  linuxnotcp:
