@@ -5,19 +5,18 @@
 Summary:	The quintessential all-purpose communications program
 Summary(pl.UTF-8):	Kwintesencja programów komunikacyjnych
 Name:		ckermit
-Version:	8.0.211
-Release:	9
+Version:	9.0.302
+Release:	0.1
 License:	Special (see Copyright Notice)
 Group:		Applications/Communications
-Source0:	ftp://kermit.columbia.edu/kermit/archives/cku211.tar.gz
-# Source0-md5:	e9e5f3e988a526e49cf177ca18719827
+Source0:	ftp://kermit.columbia.edu/kermit/archives/cku302.tar.gz
+# Source0-md5:	eac4dbf18b45775e4cdee5a7c74762b0
 Source1:	cku-%{name}.local.ini
 Source2:	cku-%{name}.modem.generic.ini
 Source3:	cku-%{name}.locale.ini
 Source4:	cku-%{name}.phone
 Patch0:		cku-makefile.patch
 Patch1:		%{name}-gcc4.patch
-Patch2:		%{name}-openssl-clash.patch
 Patch3:		build.patch
 Patch4:		050-consider-OPENSSL_NO_SSL3.patch
 URL:		http://www.columbia.edu/kermit/
@@ -46,8 +45,7 @@ komunikacyjnych.
 %prep
 %setup -q -c
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch1 -p1
 %patch3 -p1
 %patch4 -p1
 
